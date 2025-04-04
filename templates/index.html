@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Face Verification</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Face Verification System</h1>
+        <button onclick="verifyFace()">Verify</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function verifyFace() {
+            fetch('/verify')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Verified') {
+                        document.getElementById('result').innerText = `✅ Verified: ${data.name}`;
+                    } else {
+                        document.getElementById('result').innerText = '❌ Not Verified';
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
